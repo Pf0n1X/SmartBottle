@@ -1,3 +1,9 @@
 <resources>
-    <string name="app_name">IOTProject</string>
+    <string name="app_name">Smart Bottle</string>
+    <string name="channel_name">smart_bottle_channel_name</string>
+    <string name="channel_description">smart_bottle_channel_desc</string>
+    <string name="loading_text">Loading...</string>
+    <string name="notif_title">Drinking Reminder</string>
+    <string name="notif_text">"It's been a while since you last drank water. Take a sip!"</string>
+    <string name="bt_not_found_text">No Paired Bluetooth Devices Found.</string>
 </resources>
