@@ -117,7 +117,7 @@ class Control : AppCompatActivity() {
         val intent: Intent = Intent(this, ReminderBroadcast::class.java);
         val pendingIntent: PendingIntent = PendingIntent.getBroadcast(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
         val alarmManager: AlarmManager = getSystemService(ALARM_SERVICE) as AlarmManager;
-        val notifTime: Long = System.currentTimeMillis(); // + NOTIFICATION_DELAY;
+        val notifTime: Long = System.currentTimeMillis() + NOTIFICATION_DELAY;
         alarmManager.set(AlarmManager.RTC_WAKEUP, notifTime, pendingIntent);
     }
 
