@@ -115,9 +115,9 @@ class Control : AppCompatActivity() {
 
     private fun sendDrinkingReminder() {
         val intent: Intent = Intent(this, ReminderBroadcast::class.java);
-        val pendingIntent: PendingIntent = PendingIntent.getBroadcast(this, 0, intent, 0);
+        val pendingIntent: PendingIntent = PendingIntent.getBroadcast(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
         val alarmManager: AlarmManager = getSystemService(ALARM_SERVICE) as AlarmManager;
-        val notifTime: Long = System.currentTimeMillis() + NOTIFICATION_DELAY;
+        val notifTime: Long = System.currentTimeMillis(); // + NOTIFICATION_DELAY;
         alarmManager.set(AlarmManager.RTC_WAKEUP, notifTime, pendingIntent);
     }
 
@@ -190,9 +190,14 @@ class Control : AppCompatActivity() {
                 if (waterDiff > ACCEPTED_ERROR) {
                     waterDrank.saveValue(waterDiff.toInt());
                     sendDrinkingReminder();
+                    Handler(Looper.getMainLooper()).post(Runnable {
+                        val fmt: SimpleDateFormat = SimpleDateFormat("HH:mm dd.MM.yyyy");
+                        fmt.timeZone = TimeZone.getTimeZone("GMT+3");
+                        tvTimestamp.text = fmt.format(Date().time);
+                    });
                 } else {
                     Handler(Looper.getMainLooper()).post(Runnable {
-                        val fmt: SimpleDateFormat = SimpleDateFormat("HH:MM");
+                        val fmt: SimpleDateFormat = SimpleDateFormat("HH:mm dd.MM.yyyy");
                         fmt.timeZone = TimeZone.getTimeZone("GMT+3");
                         tvTimestamp.text = fmt.format(lastDrinkingTimestamp);
                     });
